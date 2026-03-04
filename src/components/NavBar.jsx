@@ -12,6 +12,7 @@ const NavBar = ({ user, setUser }) => {
 			{user ? (
 				<ul>
 					<li><Link to='/'>HOME</Link></li>
+                    <li><Link to='/albums'>ALBUMS</Link></li>
 					<li><Link to='/' onClick={handleSignOut}>SIGN OUT</Link></li>
 				</ul>
 			) : (

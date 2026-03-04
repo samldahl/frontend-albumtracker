@@ -4,9 +4,10 @@ import { useState, useEffect } from 'react'; // adding useState
 
 import NavBar from './components/NavBar';
 import Landing from './views/Landing/Landing';
-import Dashboard from './views/Dashboard/Dashboard';
+import AlbumList from './components/AlbumList/AlbumList.jsx';
 import SignUpForm from './components/SignUpForm';
 import SignInForm from './components/SignInForm';
+
 
 function App() {
   const [user, setUser] = useState(null);
@@ -27,7 +28,7 @@ function App() {
     <>
       <NavBar user={user} setUser={setUser} />
       <Routes>
-        <Route path='/' element={user ? <Dashboard user={user} /> : <Landing />} />
+        <Route path='/' element={user ? <AlbumList user={user} /> : <Landing />} />
         {user ? (
           <>
             {/* Protected routes */}
