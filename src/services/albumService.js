@@ -20,6 +20,25 @@ const index = async () => {
   }
 };
 
+const show = async (albumId) => {
+  try {
+    const res = await fetch(`${BASE_URL}/${albumId}`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+    });
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new Error(data.err || 'Failed to fetch album.');
+    }
+
+    return data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
 export { 
   index,
+  show,
 };

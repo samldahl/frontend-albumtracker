@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react'; // adding useState and Effect
 import NavBar from './components/NavBar';
 import Landing from './views/Landing/Landing';
 import AlbumList from './components/AlbumList/AlbumList.jsx';
+import ViewAlbum from './components/ViewAlbum/ViewAlbum.jsx';
 import SignUpForm from './components/SignUpForm';
 import SignInForm from './components/SignInForm';
 import * as albumService from './services/albumService.js';
@@ -46,6 +47,7 @@ function App() {
         {user ? (
           <>
             {/* Protected routes */}
+            <Route path='/albums/:albumId' element={<ViewAlbum />} />
           </>
         ) : (
           <>

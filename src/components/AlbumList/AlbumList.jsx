@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 const AlbumList = ({ user, albums = [] }) => {
   return (
     <main>
@@ -6,7 +8,13 @@ const AlbumList = ({ user, albums = [] }) => {
         <p>No albums yet. Create your first album!</p>
       ) : (
         albums.map((album) => (
-          <p key={album._id}>{album.albumName}</p>
+          <div key={album._id}>
+            <Link to={`/albums/${album._id}`}>
+              <h3>{album.albumName}</h3>
+            </Link>
+            <p>Type: {album.type}</p>
+            <p>Date: {album.date}</p>
+          </div>
         ))
       )}
     </main>
