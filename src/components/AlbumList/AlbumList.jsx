@@ -1,12 +1,13 @@
-const AlbumList = ({ user }) => {
+const AlbumList = ({ user, albums = [] }) => {
   return (
     <main>
       <h1>My Albums</h1>
-      {user ? (
-        
-        <p>Albums loading...</p>
+      {albums.length === 0 ? (
+        <p>No albums yet. Create your first album!</p>
       ) : (
-        <p>Please sign in to view albums.</p>
+        albums.map((album) => (
+          <p key={album._id}>{album.albumName}</p>
+        ))
       )}
     </main>
   );

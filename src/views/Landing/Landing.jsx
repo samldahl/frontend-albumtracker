@@ -1,8 +1,17 @@
-const Landing = () => {
+const Landing = ({ user }) => {
 	return (
 		<main>
-			<h1>TRACKR</h1>
-			<p>Sign in or create an account to manage albums and songs.</p>
+			<h1>ALBUM TRACKR</h1>
+			{user ? (
+				<div>
+					<p>Welcome back, {user.username}!</p>
+					<p>Click ALBUMS in the nav to view your collection.</p>
+				</div>
+			) : (
+				<div>
+					<p>Login or sign up to view and create albums</p>
+				</div>
+			)}
 		</main>
 	);
 };
