@@ -2,68 +2,46 @@ import './App.css'
 import { Routes, Route } from 'react-router-dom'; // adding React Router
 import { useState, useEffect } from 'react'; // adding useState
 
+import NavBar from './components/NavBar';
+import Landing from './views/Landing/Landing';
+import Dashboard from './views/Dashboard/Dashboard';
+import SignUpForm from './components/SignUpForm';
+import SignInForm from './components/SignInForm';
+
 function App() {
+  const [user, setUser] = useState(null);
+
+  // Check if user is already logged in on page load
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      const payload = token.split('.')[1];
+      const decodedPayload = atob(payload);
+      const parsedPayload = JSON.parse(decodedPayload);
+      setUser(parsedPayload.payload);
+    }
+  }, []);
+
   return (
-    <div className="page">
-      <main className="container">
-        <header>
-          <h1>LANDING</h1>
-          <nav className="row">
-            <button type="button" className="btn">
-              TRACKR
-            </button>
-            <div className="row">
-              <button type="button" className="btn">
-                Sign In
-              </button>
-              <button type="button" className="btn primary">
-                Sign Up
-              </button>
-            </div>
-          </nav>
-        </header>
-
-        <section className="hero">
-          <h2>Manage Your Music Projects</h2>
-          <p>
-            Organize albums, EPs, and singles.
-            <br />
-            Track every song from idea to release.
-          </p>
-          <div className="row">
-            <button type="button" className="btn primary">
-              Sign Up Free
-            </button>
-            <button type="button" className="btn">
-              Sign In
-            </button>
-          </div>
-        </section>
-
-        <section className="cards">
-          <article className="card">
-            <p>♪</p>
-            <h3>Track Songs</h3>
-            <p>Add tracks to any project</p>
-          </article>
-
-          <article className="card">
-            <p>📄</p>
-            <h3>Manage Projects</h3>
-            <p>Albums, EPs, Singles</p>
-          </article>
-
-          <article className="card">
-            <p>📅</p>
-            <h3>Target Release</h3>
-            <p>Plan your schedule</p>
-          </article>
-        </section>
-
-        <footer>footer — © 2025 Trackr</footer>
-      </main>
-    </div>
-  )
+    <>
+      <NavBar user={user} setUser={setUser} />
+      <Routes>
+        <Route path='/' element={user ? <Dashboard user={user} /> : <Landing />} />
+        {user ? (
+          <>
+            {/* Protected routes */}
+          </>
+        ) : (
+          <>
+            {/* Guest routes */}
+            <Route path='/sign-up' element={<SignUpForm setUser={setUser} />} />
+            <Route path='/sign-in' element={<SignInForm setUser={setUser} />} />
+          </>
+        )}
+      </Routes>
+    </>
+  );
 }
 
-export default App
+export default App;
