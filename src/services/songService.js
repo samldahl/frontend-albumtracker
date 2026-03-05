@@ -1,16 +1,16 @@
-const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/songs`;
+const BASE_URL = import.meta.env.VITE_BACK_END_SERVER_URL;
 
 const getBySongId = async (albumId) => {
   try {
-    const res = await fetch(`${BASE_URL}?albumId=${albumId}`, {
+    const res = await fetch(`${BASE_URL}/albums/${albumId}/songs`, {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
     });
-    const data = await res.json();
 
     if (!res.ok) {
-      throw new Error(data.err || 'Failed to fetch songs.');
+      throw new Error(`Failed to fetch songs: ${res.status}`);
     }
 
+    const data = await res.json();
     return data;
   } catch (error) {
     console.log(error);
@@ -18,9 +18,9 @@ const getBySongId = async (albumId) => {
   }
 };
 
-const create = async (songData) => {
+const create = async (albumId, songData) => {
   try {
-    const res = await fetch(BASE_URL, {
+    const res = await fetch(`${BASE_URL}/albums/${albumId}/songs`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -28,12 +28,13 @@ const create = async (songData) => {
       },
       body: JSON.stringify(songData),
     });
-    const data = await res.json();
 
     if (!res.ok) {
+      const data = await res.json();
       throw new Error(data.err || 'Failed to create song.');
     }
 
+    const data = await res.json();
     return data;
   } catch (error) {
     console.log(error);
