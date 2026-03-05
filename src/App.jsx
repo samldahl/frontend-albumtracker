@@ -44,6 +44,8 @@ function App() {
       <Routes>
       <Route path='/' element={<Landing user={user} />} />
       <Route path='/albumList' element={user ? <AlbumList user={user} albums={albums} /> : <Landing />} />
+
+
         {user ? (
           <>
             {/* Protected routes */}
