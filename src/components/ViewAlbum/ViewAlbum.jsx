@@ -1,19 +1,25 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import * as albumService from '../../services/albumService';
+import * as songService from '../../services/songService';
+import SongList from '../SongList/SongList';
 
 const ViewAlbum = () => {
   const { albumId } = useParams();
   const [album, setAlbum] = useState(null);
+  const [songs, setSongs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
   useEffect(() => {
-    const fetchAlbum = async () => {
+    const fetchAlbumAndSongs = async () => {
       try {
         setLoading(true);
         const albumData = await albumService.show(albumId);
         setAlbum(albumData);
+        
+        const songsData = await songService.getBySongId(albumId);
+        setSongs(songsData);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -21,7 +27,7 @@ const ViewAlbum = () => {
       }
     };
 
-    fetchAlbum();
+    fetchAlbumAndSongs();
   }, [albumId]);
 
   if (loading) return <main><p>Loading album...</p></main>;
@@ -34,6 +40,7 @@ const ViewAlbum = () => {
       <p>Type: {album.type}</p>
       <p>Release Date: {new Date(album.date).toLocaleDateString()}</p>
       {album.description && <p>Description: {album.description}</p>}
+      <SongList songs={songs} />
     </main>
   );
 };

@@ -1,23 +1,20 @@
-import { Link } from 'react-router-dom';
-
-const SongList = ({ user, albums, songs = [] }) => {
+const SongList = ({ songs = [] }) => {
   return (
-    <main>
-      <h1>Songs on {album.albumName}</h1>
-      {albums.length === 0 ? (
+    <div>
+      <h2>Songs</h2>
+      {songs.length === 0 ? (
         <p>No songs yet. Add your first song!</p>
       ) : (
-        songs.map((song) => (
-          <div key={song._id}>
-            <Link to={`/albums/${song._id}`}>
-              <h3>{song.songName}</h3>
-            </Link>
-            <p>Type: {song.trackNumber}</p>
-            <p>Date: {song.notes}</p>
-          </div>
-        ))
+        <ul>
+          {songs.map((song) => (
+            <li key={song._id}>
+              <strong>Track {song.trackNumber}: {song.songName}</strong>
+              {song.notes && <p>Notes: {song.notes}</p>}
+            </li>
+          ))}
+        </ul>
       )}
-    </main>
+    </div>
   );
 };
 
