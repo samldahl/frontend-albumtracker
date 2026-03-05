@@ -38,7 +38,32 @@ const show = async (albumId) => {
   }
 };
 
+const create = async (albumData) => {
+  try {
+    const res = await fetch(BASE_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+      body: JSON.stringify(albumData),
+    });
+
+    if (!res.ok) {
+      const data = await res.json();
+      throw new Error(data.err || 'Failed to create album.');
+    }
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
 export { 
   index,
   show,
+  create,
 };

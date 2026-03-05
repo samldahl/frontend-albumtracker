@@ -13,6 +13,7 @@ const NavBar = ({ user, setUser }) => {
 				<ul>
 					<li><Link to='/'>HOME</Link></li>
                     <li><Link to='/albumList'>ALBUMS</Link></li>
+                    <li><Link to='/albums/new'>CREATE ALBUM</Link></li>
 					<li><Link to='/' onClick={handleSignOut}>SIGN OUT</Link></li>
 				</ul>
 			) : (
