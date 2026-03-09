@@ -6,6 +6,7 @@ import NavBar from './components/NavBar';
 import Landing from './views/Landing/Landing';
 import AlbumList from './components/AlbumList/AlbumList.jsx';
 import CreateAlbum from './components/CreateAlbum/CreateAlbum.jsx';
+import CreateSong from './components/CreateSong/CreateSong.jsx';
 import ViewAlbum from './components/ViewAlbum/ViewAlbum.jsx';
 import SignUpForm from './components/SignUpForm';
 import SignInForm from './components/SignInForm';
@@ -52,6 +53,7 @@ function App() {
             {/* Protected routes */}
             <Route path='/albums/new' element={<CreateAlbum setAlbums={setAlbums} />} />
             <Route path='/albums/:albumId' element={<ViewAlbum />} />
+            <Route path='/albums/:albumId/songs/new' element={<CreateSong setSongs={() => {}} />} />
           </>
         ) : (
           <>

@@ -1,3 +1,11 @@
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 16px;
+  padding: 12px 16px;
+  margin: 0;
+}
+
 .page {
   padding: 16px;
 }

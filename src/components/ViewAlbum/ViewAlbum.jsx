@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import * as albumService from '../../services/albumService';
 import * as songService from '../../services/songService';
 import SongList from '../SongList/SongList';
@@ -40,6 +40,7 @@ const ViewAlbum = () => {
       <p>Type: {album.type}</p>
       <p>Release Date: {new Date(album.date).toLocaleDateString()}</p>
       {album.description && <p>Description: {album.description}</p>}
+      <Link to={`/albums/${albumId}/songs/new`}><button>Add Song</button></Link>
       <SongList songs={songs} />
     </main>
   );
