@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { signout } from '../services/authService';
+import './NavBar.css';
 
 const NavBar = ({ user, setUser }) => {
 	const handleSignOut = () => {

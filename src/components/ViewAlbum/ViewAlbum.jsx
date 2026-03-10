@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import * as albumService from '../../services/albumService';
 import * as songService from '../../services/songService';
 import SongList from '../SongList/SongList';
+
 
 const ViewAlbum = () => {
   const { albumId } = useParams();
@@ -10,7 +11,9 @@ const ViewAlbum = () => {
   const [songs, setSongs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
+  
   useEffect(() => {
     const fetchAlbumAndSongs = async () => {
       try {
@@ -46,7 +49,10 @@ const ViewAlbum = () => {
 
   return (
     <main>
-      <h1>{album.albumName}</h1>
+      <h1>{album.albumName}
+        <button onClick={() => navigate(`/albums/${albumId}/edit`)}>Edit</button>
+        <button onClick={() => handleDelete(album._id)}>Delete</button>
+</h1>
       <p>Type: {album.type}</p>
       <p>Release Date: {new Date(album.date).toLocaleDateString()}</p>
       {album.description && <p>Description: {album.description}</p>}

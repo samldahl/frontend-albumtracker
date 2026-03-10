@@ -1,7 +1,5 @@
 const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/albums`;
 
-// src/services/albumService.js
-
 const index = async () => {
   try {
     const res = await fetch(BASE_URL, {
@@ -61,9 +59,25 @@ const create = async (albumData) => {
     throw error;
   }
 };
-
-export { 
-  index,
-  show,
-  create,
+const deleteAlbum = async (albumId) => {
+  const res = await fetch(`${BASE_URL}/${albumId}`, {
+    method: 'DELETE',
+    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+  });
+  if (!res.ok) throw new Error('Failed to delete album.');
 };
+
+const updateAlbum = async (albumId, albumData) => {
+  const res = await fetch(`${BASE_URL}/${albumId}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+    body: JSON.stringify(albumData),
+  });
+  if (!res.ok) throw new Error('Failed to update album.');
+  return res.json();
+};
+
+export { index, show, create, deleteAlbum, updateAlbum };

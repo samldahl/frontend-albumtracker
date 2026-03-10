@@ -10,7 +10,7 @@ import CreateSong from './components/CreateSong/CreateSong.jsx';
 import ViewAlbum from './components/ViewAlbum/ViewAlbum.jsx';
 import SignUpForm from './components/SignUpForm';
 import SignInForm from './components/SignInForm';
-import * as albumService from './services/albumService.js';
+import EditAlbum from './components/CreateAlbum/EditAlbum.jsx';import * as albumService from './services/albumService.js';
 
 
 
@@ -45,15 +45,16 @@ function App() {
       <NavBar user={user} setUser={setUser} />
       <Routes>
       <Route path='/' element={<Landing user={user} />} />
-      <Route path='/albumList' element={user ? <AlbumList user={user} albums={albums} /> : <Landing />} />
+      <Route path='/albumList' element={user ? <AlbumList user={user} albums={albums} setAlbums={setAlbums} /> : <Landing />} />
 
 
         {user ? (
           <>
             {/* Protected routes */}
             <Route path='/albums/new' element={<CreateAlbum setAlbums={setAlbums} />} />
-            <Route path='/albums/:albumId' element={<ViewAlbum />} />
+            <Route path='/albums/:albumId' element={<ViewAlbum setAlbums={setAlbums} />} />
             <Route path='/albums/:albumId/songs/new' element={<CreateSong setSongs={() => {}} />} />
+            <Route path='/albums/:albumId/edit' element={<EditAlbum setAlbums={setAlbums} />} />
           </>
         ) : (
           <>
