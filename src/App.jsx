@@ -35,7 +35,6 @@ function App() {
     const fetchAllAlbums = async () => {
       const albumData = await albumService.index();
       setAlbums(albumData);
-      console.log('albumData:', albumData);
     };
     if (user) fetchAllAlbums();
   }, [user]);

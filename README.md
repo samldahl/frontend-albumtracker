@@ -1,6 +1,7 @@
 # Album Tracker
 
 A React app for tracking your music albums and songs.
+![Album Tracker Screenshot](./public/screenshot.png)
 
 ## Setup
 
