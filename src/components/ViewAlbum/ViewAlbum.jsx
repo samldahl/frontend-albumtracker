@@ -30,6 +30,16 @@ const ViewAlbum = () => {
     fetchAlbumAndSongs();
   }, [albumId]);
 
+  const handleDeleteSong = async (songId) => {
+    await songService.deleteSong(albumId, songId);
+    setSongs((prev) => prev.filter((s) => s._id !== songId));
+  };
+
+  const handleUpdateSong = async (songId, updatedData) => {
+    const updated = await songService.updateSong(albumId, songId, updatedData);
+    setSongs((prev) => prev.map((s) => (s._id === songId ? updated : s)));
+  };
+
   if (loading) return <main><p>Loading album...</p></main>;
   if (error) return <main><p style={{ color: 'red' }}>{error}</p></main>;
   if (!album) return <main><p>Album not found</p></main>;
@@ -41,7 +51,7 @@ const ViewAlbum = () => {
       <p>Release Date: {new Date(album.date).toLocaleDateString()}</p>
       {album.description && <p>Description: {album.description}</p>}
       <Link to={`/albums/${albumId}/songs/new`}><button>Add Song</button></Link>
-      <SongList songs={songs} />
+      <SongList songs={songs} onDelete={handleDeleteSong} onUpdate={handleUpdateSong} />
     </main>
   );
 };

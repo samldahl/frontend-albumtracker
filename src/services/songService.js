@@ -42,4 +42,25 @@ const create = async (albumId, songData) => {
   }
 };
 
-export { getBySongId, create };
+const deleteSong = async (albumId, songId) => {
+  const res = await fetch(`${BASE_URL}/albums/${albumId}/songs/${songId}`, {
+    method: "DELETE",
+    headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+  });
+  if (!res.ok) throw new Error("Failed to delete song.");
+};
+
+const updateSong = async (albumId, songId, songData) => {
+  const res = await fetch(`${BASE_URL}/albums/${albumId}/songs/${songId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+    body: JSON.stringify(songData),
+  });
+  if (!res.ok) throw new Error("Failed to update song.");
+  return res.json();
+};
+
+export { getBySongId, create, deleteSong, updateSong };
