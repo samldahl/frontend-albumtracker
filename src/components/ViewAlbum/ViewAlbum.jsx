@@ -5,13 +5,19 @@ import * as songService from '../../services/songService';
 import SongList from '../SongList/SongList';
 
 
-const ViewAlbum = () => {
+const ViewAlbum = ({ setAlbums }) => {
   const { albumId } = useParams();
   const [album, setAlbum] = useState(null);
   const [songs, setSongs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const navigate = useNavigate();
+
+  const handleDelete = async (id) => {
+    await albumService.deleteAlbum(id);
+    setAlbums((prev) => prev.filter((a) => a._id !== id));
+    navigate('/albumList');
+  };
 
   
   useEffect(() => {
