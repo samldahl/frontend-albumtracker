@@ -1,10 +1,31 @@
 # Album Tracker
 
-A React app for tracking your music albums and songs.
+A React app for tracking your music albums and songs. Create an account, log your albums and EPs, and build out tracklists with notes for each song.
 
 ![Album Tracker Screenshot](./public/AlbumTracker.png)
 
-## Setup
+## Getting Started
+
+- **Deployed app:** [sam-album-tracker.netlify.app](https://sam-album-tracker.netlify.app/)
+- **Planning board:** [Trello](https://trello.com/invite/b/69a5b72e9fc61971e93ec70a/ATTIf487054d5c2af36e9ee3d467f502a00b127BD2AA/albummaker)
+- **Back-end repository:** [github.com/samldahl/backend](https://github.com/samldahl/backend)
+
+## Technologies Used
+
+- MongoDB
+- Express
+- React 19
+- Node.js
+- React Router
+- Vite
+- JWT authentication
+- Netlify (deployment)
+
+## Next Steps
+
+- Improve CSS and overall UX for a better mobile experience
+
+## Local Setup
 
 1. Clone the repo and install dependencies:
    ```bash
@@ -20,16 +41,3 @@ A React app for tracking your music albums and songs.
    ```bash
    npm run dev
    ```
-
-## Features
-
-- Sign up / Sign in
-- Create, edit, and delete albums
-- Add, edit, and delete songs within an album
-- View all albums and tracklists
-
-## Tech Stack
-
-- React 19
-- React Router v7
-- Vite
