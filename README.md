@@ -8,7 +8,8 @@ A React app for tracking your music albums and songs. Create an account, log you
 
 - **Deployed app:** [sam-album-tracker.netlify.app](https://sam-album-tracker.netlify.app/)
 - **Planning board:** [Trello](https://trello.com/invite/b/69a5b72e9fc61971e93ec70a/ATTIf487054d5c2af36e9ee3d467f502a00b127BD2AA/albummaker)
-- **Back-end repository:** [github.com/samldahl/backend](https://github.com/samldahl/backend)
+- **Back-end repository:** [github.com/samldahl/backend-albumtracker](https://github.com/samldahl/backend-albumtracker)
+- 
 
 ## Technologies Used
 
